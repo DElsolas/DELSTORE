@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUBG Mobile - DEL STORE</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #09090d;
+            color: white;
+        }
+
+        header {
+            height: 75px;
+            padding: 0 7%;
+            background: #111118;
+            border-bottom: 1px solid #282832;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            color: #ffd000;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .back {
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 45px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #999;
+            margin-bottom: 35px;
+        }
+
+        .box {
+            background: #15151d;
+            border: 1px solid #2b2b37;
+            border-radius: 20px;
+            padding: 30px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .packages {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .package {
+            background: #0c0c11;
+            border: 2px solid #2b2b37;
+            border-radius: 14px;
+            padding: 25px 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .package:hover,
+        .package.selected {
+            border-color: #ffd000;
+            background: #18170e;
+            transform: translateY(-3px);
+        }
+
+        .amount {
+            color: #ffd000;
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .payment-section {
+            margin-top: 35px;
+            display: none;
+        }
+
+        .payment-section.show {
+            display: block;
+        }
+
+        .payments {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .payment {
+            background: #0c0c11;
+            border: 2px solid #2b2b37;
+            border-radius: 14px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .payment:hover,
+        .payment.selected {
+            border-color: #ffd000;
+            background: #18170e;
+        }
+
+        .payment-icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .payment-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .result {
+            margin-top: 25px;
+            display: none;
+        }
+
+        .result.show {
+            display: block;
+        }
+
+        .summary {
+            background: #0c0c11;
+            border: 1px solid #353541;
+            border-radius: 14px;
+            padding: 22px;
+            line-height: 2.2;
+        }
+
+        .summary strong {
+            color: #ffd000;
+        }
+
+        .warning {
+            margin-top: 18px;
+            padding: 17px;
+            background: #261f00;
+            border: 1px solid #806d00;
+            border-radius: 12px;
+            color: #ffe77a;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .confirm-button,
+        .whatsapp-button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            display: block;
+            text-decoration: none;
+        }
+
+        .confirm-button {
+            background: #ffd000;
+            color: #111;
+        }
+
+        .confirm-button:hover {
+            background: #ffe052;
+        }
+
+        .whatsapp-button {
+            background: #25D366;
+            color: white;
+            display: none;
+        }
+
+        .whatsapp-button.show {
+            display: block;
+        }
+
+        .success {
+            color: #7dffae;
+            text-align: center;
+            margin-top: 18px;
+            display: none;
+            line-height: 1.8;
+        }
+
+        .success.show {
+            display: block;
+        }
+
+        .error {
+            color: #ff7272;
+            margin-top: 12px;
+            display: none;
+            text-align: center;
+        }
+
+        @media (max-width: 750px) {
+            .packages,
+            .payments {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">DEL STORE</div>
+    <a href="index.html" class="back">← العودة للرئيسية</a>
+</header>
+
+<div class="container">
+
+    <h1>🔫 شحن PUBG Mobile</h1>
+    <p class="subtitle">اختر الباقة ثم طريقة الدفع</p>
+
+    <div class="box">
+
+        <label>اختر الباقة</label>
+
+        <div class="packages">
+
+            <div class="package"
+                 data-amount="60 UC"
+                 data-dollar="1.5"
+                 data-baridi="29"
+                 data-flexy="40">
+                <div class="amount">🪙 60 UC</div>
+            </div>
+
+            <div class="package"
+                 data-amount="300 UC"
+                 data-dollar="5.5"
+                 data-baridi="140"
+                 data-flexy="185">
+                <div class="amount">🪙 300 UC</div>
+            </div>
+
+            <div class="package"
+                 data-amount="600 UC"
+                 data-dollar="11"
+                 data-baridi="290"
+                 data-flexy="370">
+                <div class="amount">🪙 600 UC</div>
+            </div>
+
+            <div class="package"
+                 data-amount="1500 UC"
+                 data-dollar="27"
+                 data-baridi="700"
+                 data-flexy="920">
+                <div class="amount">🪙 1500 UC</div>
+            </div>
+
+            <div class="package"
+                 data-amount="3000 UC"
+                 data-dollar="54"
+                 data-baridi="1400"
+                 data-flexy="1800">
+                <div class="amount">🪙 3000 UC</div>
+            </div>
+
+            <div class="package"
+                 data-amount="6000 UC"
+                 data-dollar="107"
+                 data-baridi="2800"
+                 data-flexy="3600">
+                <div class="amount">🪙 6000 UC</div>
+            </div>
+
+        </div>
+
+        <div class="payment-section" id="paymentSection">
+
+            <label>اختر طريقة الدفع</label>
+
+            <div class="payments">
+
+                <div class="payment" data-method="flexy">
+                    <div class="payment-icon">📱</div>
+                    <div class="payment-name">Flexy</div>
+                </div>
+
+                <div class="payment" data-method="baridi">
+                    <div class="payment-icon">🏦</div>
+                    <div class="payment-name">BaridiMob</div>
+                </div>
+
+                <div class="payment" data-method="binance">
+                    <div class="payment-icon">🟡</div>
+                    <div class="payment-name">Binance</div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="result" id="result">
+
+            <div class="summary">
+
+                <div>
+                    الباقة:
+                    <strong id="selectedAmount"></strong>
+                </div>
+
+                <div>
+                    طريقة الدفع:
+                    <strong id="selectedMethod"></strong>
+                </div>
+
+                <div>
+                    السعر:
+                    <strong id="selectedPrice"></strong>
+                </div>
+
+                <div>
+                    حساب الدفع:
+                    <strong id="paymentAccount"></strong>
+                </div>
+
+            </div>
+
+            <div class="warning">
+                ⚠️ يرجى التواصل معنا قبل إرسال المبلغ.
+            </div>
+
+            <button class="confirm-button" id="confirmButton">
+                تأكيد الطلب
+            </button>
+
+            <div class="success" id="success">
+                ✅ تم تجهيز طلبك.<br>
+                اضغط على زر WhatsApp للتواصل مع البائع وإكمال الطلب.
+            </div>
+
+            <a
+                id="whatsappButton"
+                class="whatsapp-button"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                📲 التواصل مع البائع عبر WhatsApp
+            </a>
+
+        </div>
+
+        <div class="error" id="error"></div>
+
+    </div>
+
+</div>
+
+<script>
+
+    const packages = document.querySelectorAll(".package");
+    const payments = document.querySelectorAll(".payment");
+
+    const paymentSection = document.getElementById("paymentSection");
+    const result = document.getElementById("result");
+    const error = document.getElementById("error");
+    const success = document.getElementById("success");
+
+    const selectedAmount = document.getElementById("selectedAmount");
+    const selectedMethod = document.getElementById("selectedMethod");
+    const selectedPrice = document.getElementById("selectedPrice");
+    const paymentAccount = document.getElementById("paymentAccount");
+
+    const confirmButton = document.getElementById("confirmButton");
+    const whatsappButton = document.getElementById("whatsappButton");
+
+    let selectedPackage = null;
+    let selectedPayment = null;
+
+    packages.forEach(pkg => {
+
+        pkg.addEventListener("click", () => {
+
+            packages.forEach(item => {
+                item.classList.remove("selected");
+            });
+
+            pkg.classList.add("selected");
+
+            selectedPackage = pkg;
+            selectedPayment = null;
+
+            payments.forEach(item => {
+                item.classList.remove("selected");
+            });
+
+            paymentSection.classList.add("show");
+            result.classList.remove("show");
+            success.classList.remove("show");
+            whatsappButton.classList.remove("show");
+            error.style.display = "none";
+
+        });
+
+    });
+
+    payments.forEach(payment => {
+
+        payment.addEventListener("click", () => {
+
+            if (!selectedPackage) {
+                return;
+            }
+
+            payments.forEach(item => {
+                item.classList.remove("selected");
+            });
+
+            payment.classList.add("selected");
+
+            selectedPayment = payment.dataset.method;
+
+            const amount = selectedPackage.dataset.amount;
+            const dollar = selectedPackage.dataset.dollar;
+            const flexy = selectedPackage.dataset.flexy;
+            const baridi = selectedPackage.dataset.baridi;
+
+            let methodName = "";
+            let price = "";
+            let account = "";
+
+            if (selectedPayment === "flexy") {
+                methodName = "Flexy";
+                price = flexy + " ألف";
+                account = "0696819563";
+            }
+
+            if (selectedPayment === "baridi") {
+                methodName = "BaridiMob";
+                price = baridi + " ألف";
+                account = "00799999004023803967";
+            }
+
+            if (selectedPayment === "binance") {
+                methodName = "Binance";
+                price = "$" + dollar;
+                account = "1269086352";
+            }
+
+            selectedAmount.textContent = amount;
+            selectedMethod.textContent = methodName;
+            selectedPrice.textContent = price;
+            paymentAccount.textContent = account;
+
+            result.classList.add("show");
+            success.classList.remove("show");
+            whatsappButton.classList.remove("show");
+            error.style.display = "none";
+
+        });
+
+    });
+
+    confirmButton.addEventListener("click", () => {
+
+        if (!selectedPackage || !selectedPayment) {
+
+            error.textContent =
+                "اختر الباقة وطريقة الدفع أولًا.";
+
+            error.style.display = "block";
+            return;
+        }
+
+        const amount = selectedPackage.dataset.amount;
+        const dollar = selectedPackage.dataset.dollar;
+        const flexy = selectedPackage.dataset.flexy;
+        const baridi = selectedPackage.dataset.baridi;
+
+        let methodName = "";
+        let price = "";
+
+        if (selectedPayment === "flexy") {
+            methodName = "Flexy";
+            price = flexy + " ألف";
+        }
+
+        if (selectedPayment === "baridi") {
+            methodName = "BaridiMob";
+            price = baridi + " ألف";
+        }
+
+        if (selectedPayment === "binance") {
+            methodName = "Binance";
+            price = "$" + dollar;
+        }
+
+        const message =
+            "السلام عليكم، أريد طلب شحن من DEL STORE%0A%0A" +
+            "اللعبة: PUBG Mobile%0A" +
+            "الباقة: " + encodeURIComponent(amount) + "%0A" +
+            "طريقة الدفع: " + encodeURIComponent(methodName) + "%0A" +
+            "السعر: " + encodeURIComponent(price) + "%0A%0A" +
+            "⚠️ أريد إكمال الطلب والتواصل مع البائع.";
+
+        whatsappButton.href =
+            "https://wa.me/213561265114?text=" + message;
+
+        success.classList.add("show");
+        whatsappButton.classList.add("show");
+        error.style.display = "none";
+
+    });
+
+</script>
+
+</body>
+</html>

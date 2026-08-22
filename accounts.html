@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الحسابات - DEL STORE</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #09090d;
+            color: white;
+        }
+
+        header {
+            height: 80px;
+            padding: 0 7%;
+            background: #111118;
+            border-bottom: 1px solid #282832;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 55px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .back {
+            color: white;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 45px auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #999;
+            margin-bottom: 35px;
+        }
+
+        .box {
+            background: #15151d;
+            border: 1px solid #2b2b37;
+            border-radius: 20px;
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .title {
+            color: #ffd000;
+            font-size: 23px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .choices {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .payment-choices {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .choice,
+        .action {
+            background: #0c0c11;
+            border: 2px solid #2b2b37;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+            color: white;
+        }
+
+        .choice:hover,
+        .choice.selected,
+        .action:hover,
+        .action.selected {
+            border-color: #ffd000;
+            background: #18170e;
+            transform: translateY(-3px);
+        }
+
+        .icon {
+            font-size: 45px;
+            margin-bottom: 12px;
+        }
+
+        .choice h3,
+        .action h3 {
+            color: #ffd000;
+            margin-bottom: 8px;
+        }
+
+        .choice p,
+        .action p {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        label {
+            display: block;
+            margin: 18px 0 8px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 14px;
+            background: #0b0b10;
+            color: white;
+            border: 1px solid #353541;
+            border-radius: 11px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #ffd000;
+        }
+
+        .yes-no {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .yes-no-option {
+            background: #0c0c11;
+            border: 2px solid #2b2b37;
+            border-radius: 13px;
+            padding: 16px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .yes-no-option:hover,
+        .yes-no-option.selected {
+            border-color: #ffd000;
+            background: #18170e;
+            color: #ffd000;
+        }
+
+        .confirm {
+            width: 100%;
+            margin-top: 25px;
+            padding: 16px;
+            border: 0;
+            border-radius: 12px;
+            background: #ffd000;
+            color: #111;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .confirm:hover {
+            background: #ffe052;
+        }
+
+        .warning {
+            margin-top: 20px;
+            padding: 15px;
+            background: #261f00;
+            border: 1px solid #806d00;
+            border-radius: 12px;
+            color: #ffe77a;
+            text-align: center;
+            line-height: 1.7;
+        }
+
+        .error {
+            display: none;
+            color: #ff7070;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 800px) {
+            .payment-choices {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .choices,
+            .actions {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+            .logo img {
+                height: 45px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a href="index.html" class="logo">
+        <img src="logo.jpg" alt="DEL STORE">
+    </a>
+
+    <a href="index.html" class="back">
+        ← العودة للرئيسية
+    </a>
+</header>
+
+<div class="container">
+
+    <h1>🎮 الحسابات</h1>
+
+    <p class="subtitle">
+        بيع وشراء وتبديل حسابات الألعاب
+    </p>
+
+    <div class="box">
+
+        <!-- ================= اللعبة ================= -->
+
+        <div class="section">
+
+            <div class="title">
+                1. اختر اللعبة
+            </div>
+
+            <div class="choices">
+
+                <div class="choice" data-game="Free Fire">
+                    <div class="icon">🔥</div>
+                    <h3>Free Fire</h3>
+                    <p>حسابات Free Fire</p>
+                </div>
+
+                <div class="choice" data-game="eFootball">
+                    <div class="icon">⚽</div>
+                    <h3>eFootball</h3>
+                    <p>حسابات eFootball</p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= العملية ================= -->
+
+        <div class="section hidden" id="actionSection">
+
+            <div class="title">
+                2. اختر العملية
+            </div>
+
+            <div class="actions">
+
+                <div class="action" data-action="شراء">
+                    <div class="icon">🛒</div>
+                    <h3>شراء</h3>
+                    <p>أريد شراء حساب</p>
+                </div>
+
+                <!-- البيع -->
+
+                <div class="action" id="sellAction">
+                    <div class="icon">💰</div>
+                    <h3>بيع</h3>
+                    <p>أريد بيع حسابي</p>
+                </div>
+
+                <!-- التبديل -->
+
+                <div class="action" data-action="تبديل">
+                    <div class="icon">🔄</div>
+                    <h3>تبديل</h3>
+                    <p>أريد تبديل حسابي</p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= الشراء ================= -->
+
+        <div class="section hidden" id="buySection">
+
+            <div class="title">
+                3. اختر طريقة الدفع
+            </div>
+
+            <div class="choices payment-choices">
+
+                <div class="choice buy-payment" data-payment="BaridiMob">
+                    <div class="icon">🏦</div>
+                    <h3>BaridiMob</h3>
+                    <p>طريقة الدفع</p>
+                </div>
+
+                <div class="choice buy-payment" data-payment="Flexy">
+                    <div class="icon">📱</div>
+                    <h3>Flexy</h3>
+                    <p>طريقة الدفع</p>
+                </div>
+
+                <div class="choice buy-payment" data-payment="Binance">
+                    <div class="icon">🟡</div>
+                    <h3>Binance</h3>
+                    <p>طريقة الدفع</p>
+                </div>
+
+                <div class="choice buy-payment" data-payment="Bybit">
+                    <div class="icon">🔵</div>
+                    <h3>Bybit</h3>
+                    <p>طريقة الدفع</p>
+                </div>
+
+            </div>
+
+
+            <div class="hidden" id="buyFields">
+
+                <label>
+                    صف الحساب الذي تريد شراءه
+                </label>
+
+                <textarea
+                    id="wantedAccount"
+                    placeholder="اكتب مواصفات الحساب الذي تبحث عنه..."
+                ></textarea>
+
+                <label>
+                    المبلغ الذي تملكه
+                </label>
+
+                <input
+                    type="text"
+                    id="availableMoney"
+                    placeholder="مثال: 30 ألف"
+                >
+
+                <label>
+                    رقم هاتفك
+                </label>
+
+                <input
+                    type="tel"
+                    id="buyerPhone"
+                    placeholder="05xxxxxxxx"
+                >
+
+                <button
+                    class="confirm"
+                    id="buyConfirm"
+                >
+                    ✅ تأكيد طلب الشراء
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= التبديل ================= -->
+
+        <div class="section hidden" id="tradeSection">
+
+            <div class="title">
+                3. معلومات التبديل
+            </div>
+
+            <label>
+                1. اوصف حسابك
+            </label>
+
+            <textarea
+                id="tradeDescription"
+                placeholder="اكتب وصف حسابك وتفاصيله..."
+            ></textarea>
+
+            <label>
+                2. ماذا تريد مقابل الحساب؟
+            </label>
+
+            <textarea
+                id="tradeWant"
+                placeholder="اكتب ما تريده مقابل حسابك..."
+            ></textarea>
+
+            <label>
+                3. هل هنالك إضافة؟
+            </label>
+
+            <div class="yes-no">
+
+                <div class="yes-no-option" id="addYes">
+                    نعم
+                </div>
+
+                <div class="yes-no-option" id="addNo">
+                    لا
+                </div>
+
+            </div>
+
+
+            <div class="hidden" id="addField">
+
+                <label>
+                    ما هي الإضافة؟
+                </label>
+
+                <input
+                    type="text"
+                    id="tradeAdd"
+                    placeholder="اكتب الإضافة..."
+                >
+
+            </div>
+
+
+            <div class="hidden" id="phoneField">
+
+                <label>
+                    رقم الهاتف
+                </label>
+
+                <input
+                    type="tel"
+                    id="tradePhone"
+                    placeholder="05xxxxxxxx"
+                >
+
+                <button
+                    class="confirm"
+                    id="tradeConfirm"
+                >
+                    ✅ تأكيد طلب التبديل
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="warning">
+            ⚠️ لا ترسل كلمات المرور أو رموز التحقق داخل الموقع.
+            بعد التأكيد ستفتح محادثة WhatsApp مع DEL PEIRO.
+        </div>
+
+        <div class="error" id="error"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    const gameChoices =
+        document.querySelectorAll(".choice[data-game]");
+
+    const actionSection =
+        document.getElementById("actionSection");
+
+    const buySection =
+        document.getElementById("buySection");
+
+    const buyFields =
+        document.getElementById("buyFields");
+
+    const tradeSection =
+        document.getElementById("tradeSection");
+
+    const sellAction =
+        document.getElementById("sellAction");
+
+    const buyPayments =
+        document.querySelectorAll(".buy-payment");
+
+    const addYes =
+        document.getElementById("addYes");
+
+    const addNo =
+        document.getElementById("addNo");
+
+    const addField =
+        document.getElementById("addField");
+
+    const phoneField =
+        document.getElementById("phoneField");
+
+    const error =
+        document.getElementById("error");
+
+
+    let selectedGame = "";
+    let selectedPayment = "";
+    let hasAddition = "";
+
+
+    /* ================= اختيار اللعبة ================= */
+
+    gameChoices.forEach(choice => {
+
+        choice.addEventListener("click", () => {
+
+            gameChoices.forEach(item => {
+                item.classList.remove("selected");
+            });
+
+            choice.classList.add("selected");
+
+            selectedGame = choice.dataset.game;
+
+            actionSection.classList.remove("hidden");
+
+            buySection.classList.add("hidden");
+            tradeSection.classList.add("hidden");
+            buyFields.classList.add("hidden");
+
+            selectedPayment = "";
+            hasAddition = "";
+
+            error.style.display = "none";
+        });
+
+    });
+
+
+    /* ================= البيع ================= */
+
+    sellAction.addEventListener("click", () => {
+
+        if (!selectedGame) {
+            error.textContent = "اختر اللعبة أولًا.";
+            error.style.display = "block";
+            return;
+        }
+
+        if (selectedGame === "eFootball") {
+
+            window.location.href =
+                "sell-efootball.html";
+
+            return;
+        }
+
+        if (selectedGame === "Free Fire") {
+
+            window.location.href =
+                "sell-freefire.html";
+
+            return;
+        }
+
+    });
+
+
+    /* ================= الشراء ================= */
+
+    document
+        .querySelector('.action[data-action="شراء"]')
+        .addEventListener("click", () => {
+
+            if (!selectedGame) {
+                error.textContent = "اختر اللعبة أولًا.";
+                error.style.display = "block";
+                return;
+            }
+
+            buySection.classList.remove("hidden");
+            tradeSection.classList.add("hidden");
+            error.style.display = "none";
+
+        });
+
+
+    /* ================= طريقة الدفع ================= */
+
+    buyPayments.forEach(payment => {
+
+        payment.addEventListener("click", () => {
+
+            buyPayments.forEach(item => {
+                item.classList.remove("selected");
+            });
+
+            payment.classList.add("selected");
+
+            selectedPayment =
+                payment.dataset.payment;
+
+            buyFields.classList.remove("hidden");
+
+            error.style.display = "none";
+
+        });
+
+    });
+
+
+    /* ================= التبديل ================= */
+
+    document
+        .querySelector('.action[data-action="تبديل"]')
+        .addEventListener("click", () => {
+
+            if (!selectedGame) {
+                error.textContent = "اختر اللعبة أولًا.";
+                error.style.display = "block";
+                return;
+            }
+
+            tradeSection.classList.remove("hidden");
+            buySection.classList.add("hidden");
+
+            addField.classList.add("hidden");
+            phoneField.classList.add("hidden");
+
+            addYes.classList.remove("selected");
+            addNo.classList.remove("selected");
+
+            hasAddition = "";
+
+            error.style.display = "none";
+
+        });
+
+
+    /* ================= نعم ================= */
+
+    addYes.addEventListener("click", () => {
+
+        addYes.classList.add("selected");
+        addNo.classList.remove("selected");
+
+        hasAddition = "نعم";
+
+        addField.classList.remove("hidden");
+        phoneField.classList.remove("hidden");
+
+    });
+
+
+    /* ================= لا ================= */
+
+    addNo.addEventListener("click", () => {
+
+        addNo.classList.add("selected");
+        addYes.classList.remove("selected");
+
+        hasAddition = "لا";
+
+        addField.classList.add("hidden");
+
+        document.getElementById("tradeAdd").value = "";
+
+        phoneField.classList.remove("hidden");
+
+    });
+
+
+    /* ================= تأكيد الشراء ================= */
+
+    document
+        .getElementById("buyConfirm")
+        .addEventListener("click", () => {
+
+            const description =
+                document.getElementById("wantedAccount")
+                .value
+                .trim();
+
+            const money =
+                document.getElementById("availableMoney")
+                .value
+                .trim();
+
+            const phone =
+                document.getElementById("buyerPhone")
+                .value
+                .trim();
+
+
+            if (!selectedPayment) {
+
+                error.textContent =
+                    "اختر طريقة الدفع أولًا.";
+
+                error.style.display = "block";
+
+                return;
+            }
+
+
+            if (!description || !money || !phone) {
+
+                error.textContent =
+                    "أكمل وصف الحساب والمبلغ ورقم الهاتف.";
+
+                error.style.display = "block";
+
+                return;
+            }
+
+
+            const message =
+
+                "🔔 طلب شراء حساب - DEL STORE\n\n" +
+                "اللعبة: " + selectedGame + "\n" +
+                "طريقة الدفع: " + selectedPayment + "\n\n" +
+                "صف الحساب المطلوب:\n" +
+                description + "\n\n" +
+                "المبلغ الذي أملكه: " + money + "\n" +
+                "رقم الهاتف: " + phone + "\n\n" +
+                "أريد إكمال الطلب مع DEL PEIRO كوسيط.";
+
+
+            window.location.href =
+                "https://wa.me/213561265114?text=" +
+                encodeURIComponent(message);
+
+        });
+
+
+    /* ================= تأكيد التبديل ================= */
+
+    document
+        .getElementById("tradeConfirm")
+        .addEventListener("click", () => {
+
+            const description =
+                document.getElementById("tradeDescription")
+                .value
+                .trim();
+
+            const want =
+                document.getElementById("tradeWant")
+                .value
+                .trim();
+
+            const add =
+                document.getElementById("tradeAdd")
+                .value
+                .trim();
+
+            const phone =
+                document.getElementById("tradePhone")
+                .value
+                .trim();
+
+
+            if (!description || !want) {
+
+                error.textContent =
+                    "أكمل وصف الحساب وما تريده مقابل الحساب.";
+
+                error.style.display = "block";
+
+                return;
+            }
+
+
+            if (!hasAddition) {
+
+                error.textContent =
+                    "اختر نعم أو لا في الإضافة.";
+
+                error.style.display = "block";
+
+                return;
+            }
+
+
+            if (hasAddition === "نعم" && !add) {
+
+                error.textContent =
+                    "اكتب الإضافة.";
+
+                error.style.display = "block";
+
+                return;
+            }
+
+
+            if (!phone) {
+
+                error.textContent =
+                    "أدخل رقم الهاتف.";
+
+                error.style.display = "block";
+
+                return;
+            }
+
+
+            let message =
+
+                "🔄 طلب تبديل حساب - DEL STORE\n\n" +
+                "اللعبة: " + selectedGame + "\n\n" +
+                "وصف الحساب:\n" +
+                description + "\n\n" +
+                "ماذا أريد مقابل الحساب:\n" +
+                want + "\n\n" +
+                "هل هنالك إضافة: " +
+                hasAddition;
+
+
+            if (hasAddition === "نعم") {
+
+                message +=
+                    "\nالإضافة:\n" +
+                    add;
+
+            }
+
+
+            message +=
+
+                "\n\nرقم الهاتف:\n" +
+                phone +
+                "\n\n📸 يرجى إرسال صور الحساب في هذه المحادثة." +
+                "\n\nأريد إكمال الطلب مع DEL PEIRO كوسيط.";
+
+
+            window.location.href =
+                "https://wa.me/213561265114?text=" +
+                encodeURIComponent(message);
+
+        });
+
+</script>
+
+</body>
+</html>
