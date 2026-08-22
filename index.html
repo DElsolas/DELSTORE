@@ -1,10 +1,10 @@
+```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>DEL STORE</title>
 
     <style>
@@ -20,30 +20,21 @@
             color: white;
         }
 
-        /* ================= HEADER ================= */
-
         header {
             height: 80px;
             padding: 0 7%;
             background: #111118;
             border-bottom: 1px solid #282832;
-
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
+        .logo-text {
+            color: #ffd000;
             text-decoration: none;
-        }
-
-        .logo img {
-            height: 55px;
-            width: auto;
-            display: block;
-            object-fit: contain;
+            font-size: 25px;
+            font-weight: bold;
         }
 
         nav {
@@ -55,7 +46,6 @@
             color: #ddd;
             text-decoration: none;
             font-size: 16px;
-            transition: 0.2s;
         }
 
         nav a:hover {
@@ -69,32 +59,17 @@
             border-radius: 10px;
             text-decoration: none;
             font-weight: bold;
-            transition: 0.2s;
         }
-
-        .contact-button:hover {
-            background: #ffe052;
-        }
-
-        /* ================= HERO ================= */
 
         .hero {
             min-height: 470px;
-
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-
             text-align: center;
             padding: 50px 20px;
-
-            background:
-                radial-gradient(
-                    circle at center,
-                    #292000 0%,
-                    #0b0b0f 55%
-                );
+            background: radial-gradient(circle at center, #292000 0%, #0b0b0f 55%);
         }
 
         .hero h1 {
@@ -116,25 +91,22 @@
             border: none;
             background: #ffd000;
             color: #111;
-
             padding: 16px 38px;
-
             border-radius: 12px;
-
             font-size: 18px;
             font-weight: bold;
-
             cursor: pointer;
-
-            transition: 0.2s;
         }
 
-        .hero-button:hover {
-            transform: translateY(-3px);
+        .hero-button:hover,
+        .telegram-button:hover,
+        .service-button:hover,
+        .trust-main-button:hover {
             background: #ffe052;
+            transform: translateY(-2px);
         }
 
-        /* ================= TRUST ================= */
+        /* الثقة */
 
         .trust-section {
             padding: 70px 7%;
@@ -147,46 +119,25 @@
             margin-bottom: 30px;
         }
 
-        .trust-main {
-            display: flex;
-            justify-content: center;
-        }
-
         .trust-main-button {
             border: none;
             background: #ffd000;
             color: #111;
-
             padding: 17px 35px;
-
             border-radius: 12px;
-
             font-size: 18px;
             font-weight: bold;
-
             cursor: pointer;
-
-            transition: 0.2s;
-        }
-
-        .trust-main-button:hover {
-            background: #ffe052;
-            transform: translateY(-3px);
         }
 
         .trust-modal {
             position: fixed;
             inset: 0;
-
-            background: rgba(0, 0, 0, 0.82);
-
+            background: rgba(0,0,0,.82);
             display: none;
-
             align-items: center;
             justify-content: center;
-
             padding: 20px;
-
             z-index: 1000;
         }
 
@@ -197,107 +148,77 @@
         .trust-modal-box {
             width: 100%;
             max-width: 700px;
-
-            background: #15151d;
-
-            border: 1px solid #383844;
-
-            border-radius: 20px;
-
-            padding: 30px;
-
             max-height: 90vh;
             overflow-y: auto;
+            background: #15151d;
+            border: 1px solid #383844;
+            border-radius: 20px;
+            padding: 30px;
         }
 
         .trust-modal-header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-
+            justify-content: space-between;
             margin-bottom: 25px;
         }
 
         .trust-modal-header h2 {
-            font-size: 25px;
             color: #ffd000;
+            font-size: 25px;
         }
 
-        .trust-close {
+        .trust-close,
+        .close {
             background: #292934;
             color: white;
-
             border: none;
-
             width: 40px;
             height: 40px;
-
             border-radius: 10px;
-
             font-size: 20px;
-
             cursor: pointer;
         }
 
         .trust-card {
             background: #0c0c11;
-
             border: 1px solid #2b2b37;
-
             border-radius: 15px;
-
             padding: 25px;
-
             margin-bottom: 18px;
-
             text-align: center;
         }
 
         .trust-card h3 {
             color: #ffd000;
-
             font-size: 21px;
-
             margin-bottom: 10px;
         }
 
         .trust-card p {
             color: #999;
-
             line-height: 1.7;
-
             margin-bottom: 20px;
         }
 
         .telegram-button {
             display: inline-block;
-
             background: #ffd000;
             color: #111;
-
             text-decoration: none;
-
             padding: 13px 25px;
-
             border-radius: 10px;
-
             font-weight: bold;
-
-            transition: 0.2s;
         }
 
-        .telegram-button:hover {
-            background: #ffe052;
-            transform: translateY(-2px);
-        }
-
-        /* ================= SERVICES ================= */
+        /* الخدمات */
 
         .services {
             padding: 60px 7%;
         }
 
-        .services h2 {
+        .services h2,
+        .features h2 {
             text-align: center;
             font-size: 34px;
             margin-bottom: 35px;
@@ -305,25 +226,20 @@
 
         .service-container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2,1fr);
             gap: 25px;
         }
 
         .service-card {
             background: #15151d;
             border: 1px solid #2b2b37;
-
             border-radius: 18px;
-
             padding: 35px 25px;
-
             text-align: center;
-
-            transition: 0.3s;
         }
 
         .service-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-5px);
             border-color: #ffd000;
         }
 
@@ -345,40 +261,23 @@
 
         .service-button {
             display: inline-block;
-
             background: #ffd000;
             color: #111;
-
             padding: 12px 28px;
-
             border-radius: 10px;
-
             text-decoration: none;
-
             font-weight: bold;
-
-            transition: 0.2s;
         }
 
-        .service-button:hover {
-            background: #ffe052;
-        }
-
-        /* ================= FEATURES ================= */
+        /* لماذا نحن */
 
         .features {
             padding: 20px 7% 70px;
         }
 
-        .features h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 32px;
-        }
-
         .feature-container {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(3,1fr);
             gap: 20px;
         }
 
@@ -386,9 +285,7 @@
             background: #111118;
             border: 1px solid #272731;
             border-radius: 15px;
-
             padding: 25px;
-
             text-align: center;
         }
 
@@ -405,21 +302,16 @@
             color: #888;
         }
 
-        /* ================= GAME MODAL ================= */
+        /* نافذة الشحن */
 
         .modal {
             position: fixed;
             inset: 0;
-
-            background: rgba(0, 0, 0, 0.80);
-
+            background: rgba(0,0,0,.8);
             display: none;
-
             align-items: center;
             justify-content: center;
-
             padding: 20px;
-
             z-index: 999;
         }
 
@@ -430,76 +322,41 @@
         .modal-box {
             width: 100%;
             max-width: 850px;
-
             max-height: 90vh;
             overflow-y: auto;
-
             background: #15151d;
-
             border: 1px solid #383844;
-
             border-radius: 20px;
-
             padding: 30px;
         }
 
         .modal-top {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-
+            justify-content: space-between;
             margin-bottom: 25px;
-        }
-
-        .modal-top h2 {
-            font-size: 28px;
-        }
-
-        .close {
-            background: #292934;
-            color: white;
-
-            border: none;
-
-            width: 40px;
-            height: 40px;
-
-            border-radius: 10px;
-
-            font-size: 20px;
-
-            cursor: pointer;
         }
 
         .game-choice-container {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(4,1fr);
             gap: 15px;
         }
 
         .game-choice {
             background: #0c0c11;
-
             border: 2px solid #2b2b37;
-
             border-radius: 15px;
-
             padding: 25px 12px;
-
             text-align: center;
-
             text-decoration: none;
-
             color: white;
-
-            transition: 0.25s;
-
             cursor: pointer;
         }
 
         .game-choice:hover {
             border-color: #ffd000;
-            transform: translateY(-6px);
+            transform: translateY(-5px);
         }
 
         .game-choice-icon {
@@ -516,10 +373,9 @@
         .game-choice p {
             color: #888;
             font-size: 13px;
-            line-height: 1.5;
         }
 
-        /* ================= APP FORM ================= */
+        /* التطبيقات */
 
         .app-form {
             display: none;
@@ -533,17 +389,11 @@
             color: #aaa;
             cursor: pointer;
             margin-bottom: 20px;
-            display: inline-block;
-        }
-
-        .app-back:hover {
-            color: #ffd000;
         }
 
         .app-form h2 {
             color: #ffd000;
             margin-bottom: 25px;
-            font-size: 28px;
         }
 
         .field {
@@ -559,65 +409,46 @@
         .field input {
             width: 100%;
             padding: 15px;
-
             background: #0b0b10;
             color: white;
-
             border: 1px solid #353541;
             border-radius: 11px;
-
             font-size: 16px;
             outline: none;
         }
 
-        .field input:focus {
-            border-color: #ffd000;
-        }
-
         .payment-box {
             margin-top: 25px;
-
             background: #ffd000;
             color: #111;
-
             border-radius: 16px;
-
             padding: 25px;
         }
 
         .payment-box h3 {
-            font-size: 21px;
-            margin-bottom: 18px;
             text-align: center;
+            margin-bottom: 18px;
         }
 
         .payment-options {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(4,1fr);
             gap: 10px;
         }
 
         .payment-option {
             background: #111118;
             color: white;
-
             border: 2px solid transparent;
-
             border-radius: 11px;
-
             padding: 14px 8px;
-
             text-align: center;
-
             cursor: pointer;
-
-            transition: 0.2s;
         }
 
-        .payment-option:hover,
-        .payment-option.selected {
+        .payment-option.selected,
+        .payment-option:hover {
             border-color: white;
-            transform: translateY(-2px);
         }
 
         .payment-icon {
@@ -632,26 +463,15 @@
 
         .app-submit {
             width: 100%;
-
             margin-top: 20px;
-
             padding: 16px;
-
             background: #111118;
             color: white;
-
             border: none;
-
             border-radius: 11px;
-
             font-size: 17px;
             font-weight: bold;
-
             cursor: pointer;
-        }
-
-        .app-submit:hover {
-            background: #22222c;
         }
 
         .app-error {
@@ -661,23 +481,15 @@
             display: none;
         }
 
-        /* ================= FOOTER ================= */
-
         footer {
             background: #111118;
-
             border-top: 1px solid #252530;
-
             text-align: center;
-
             padding: 30px;
-
             color: #777;
         }
 
-        /* ================= MOBILE ================= */
-
-        @media (max-width: 800px) {
+        @media (max-width:800px) {
 
             nav {
                 display: none;
@@ -687,35 +499,24 @@
                 font-size: 38px;
             }
 
-            .service-container {
-                grid-template-columns: 1fr;
-            }
-
+            .service-container,
             .feature-container {
                 grid-template-columns: 1fr;
             }
 
             .game-choice-container {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2,1fr);
             }
 
             .payment-options {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .logo img {
-                height: 45px;
+                grid-template-columns: repeat(2,1fr);
             }
         }
 
-        @media (max-width: 500px) {
+        @media (max-width:500px) {
 
             .game-choice-container {
                 grid-template-columns: 1fr;
-            }
-
-            .payment-options {
-                grid-template-columns: repeat(2, 1fr);
             }
         }
     </style>
@@ -725,8 +526,8 @@
 
 <header>
 
-    <a href="index.html" class="logo">
-        <img src="logo.jpg" alt="DEL STORE">
+    <a href="index.html" class="logo-text">
+        DEL STORE
     </a>
 
     <nav>
@@ -740,15 +541,12 @@
         class="contact-button"
         href="https://wa.me/213561265114"
         target="_blank"
-        rel="noopener noreferrer"
     >
         تواصل معنا
     </a>
 
 </header>
 
-
-<!-- ================= HERO ================= -->
 
 <section class="hero">
 
@@ -771,33 +569,23 @@
 </section>
 
 
-<!-- ================= الثقة ================= -->
+<!-- الثقة -->
 
-<section
-    class="trust-section"
-    id="trust"
->
+<section class="trust-section" id="trust">
 
     <h2 class="trust-title">
         🛡️ دلائل الثقة وقناة عرض حسابات البيع
     </h2>
 
-    <div class="trust-main">
-
-        <button
-            class="trust-main-button"
-            id="openTrust"
-        >
-            🛡️ دلائل الثقة وقناة عرض حسابات البيع
-        </button>
-
-    </div>
-
-
-    <div
-        class="trust-modal"
-        id="trustModal"
+    <button
+        class="trust-main-button"
+        id="openTrust"
     >
+        🛡️ دلائل الثقة وقناة عرض حسابات البيع
+    </button>
+
+
+    <div class="trust-modal" id="trustModal">
 
         <div class="trust-modal-box">
 
@@ -817,8 +605,6 @@
             </div>
 
 
-            <!-- 1 -->
-
             <div class="trust-card">
 
                 <h3>
@@ -830,18 +616,15 @@
                 </p>
 
                 <a
+                    class="telegram-button"
                     href="https://t.me/D_2_2_C"
                     target="_blank"
-                    rel="noopener noreferrer"
-                    class="telegram-button"
                 >
                     إلقاء نظرة على دلائل الثقة
                 </a>
 
             </div>
 
-
-            <!-- 2 -->
 
             <div class="trust-card">
 
@@ -854,18 +637,15 @@
                 </p>
 
                 <a
+                    class="telegram-button"
                     href="https://t.me/D_1_S_6"
                     target="_blank"
-                    rel="noopener noreferrer"
-                    class="telegram-button"
                 >
                     إلقاء نظرة على قناة عرض حسابات البيع
                 </a>
 
             </div>
 
-
-            <!-- 3 -->
 
             <div class="trust-card">
 
@@ -878,10 +658,9 @@
                 </p>
 
                 <a
+                    class="telegram-button"
                     href="https://t.me/P_0_0_M"
                     target="_blank"
-                    rel="noopener noreferrer"
-                    class="telegram-button"
                 >
                     إلقاء نظرة على شات عرض حسابات التبديل
                 </a>
@@ -895,12 +674,9 @@
 </section>
 
 
-<!-- ================= SERVICES ================= -->
+<!-- الخدمات -->
 
-<section
-    class="services"
-    id="services"
->
+<section class="services" id="services">
 
     <h2>
         خدمات DEL STORE
@@ -910,9 +686,7 @@
 
         <div class="service-card">
 
-            <div class="service-icon">
-                🎧
-            </div>
+            <div class="service-icon">🎧</div>
 
             <h3>
                 خدمة العملاء
@@ -925,9 +699,8 @@
 
             <a
                 class="service-button"
-                href="https://wa.me/213561265114?text=السلام%20عليكم،%20أريد%20التواصل%20مع%20خدمة%20عملاء%20DEL%20STORE"
+                href="https://wa.me/213561265114"
                 target="_blank"
-                rel="noopener noreferrer"
             >
                 📲 تواصل مع خدمة العملاء
             </a>
@@ -937,9 +710,7 @@
 
         <div class="service-card">
 
-            <div class="service-icon">
-                🔄
-            </div>
+            <div class="service-icon">🔄</div>
 
             <h3>
                 بيع وشراء الحسابات والتبديل
@@ -964,12 +735,9 @@
 </section>
 
 
-<!-- ================= FEATURES ================= -->
+<!-- لماذا نحن -->
 
-<section
-    class="features"
-    id="features"
->
+<section class="features" id="features">
 
     <h2>
         لماذا DEL STORE؟
@@ -1000,16 +768,11 @@
 </section>
 
 
-<!-- ================= نافذة الشحن ================= -->
+<!-- نافذة الشحن -->
 
-<div
-    class="modal"
-    id="gameModal"
->
+<div class="modal" id="gameModal">
 
     <div class="modal-box">
-
-        <!-- اختيار الألعاب -->
 
         <div id="gameSelection">
 
@@ -1031,91 +794,43 @@
 
             <div class="game-choice-container">
 
-                <!-- Free Fire -->
-
                 <a
                     class="game-choice"
                     href="freefire.html"
                 >
-
-                    <div class="game-choice-icon">
-                        🔥
-                    </div>
-
-                    <h3>
-                        Free Fire
-                    </h3>
-
-                    <p>
-                        شحن Diamonds والعضويات
-                    </p>
-
+                    <div class="game-choice-icon">🔥</div>
+                    <h3>Free Fire</h3>
+                    <p>شحن Diamonds والعضويات</p>
                 </a>
 
-
-                <!-- eFootball -->
 
                 <a
                     class="game-choice"
                     href="efootball.html"
                 >
-
-                    <div class="game-choice-icon">
-                        ⚽
-                    </div>
-
-                    <h3>
-                        eFootball
-                    </h3>
-
-                    <p>
-                        شحن Coins
-                    </p>
-
+                    <div class="game-choice-icon">⚽</div>
+                    <h3>eFootball</h3>
+                    <p>شحن Coins</p>
                 </a>
 
-
-                <!-- PUBG -->
 
                 <a
                     class="game-choice"
                     href="pubg.html"
                 >
-
-                    <div class="game-choice-icon">
-                        🔫
-                    </div>
-
-                    <h3>
-                        PUBG Mobile
-                    </h3>
-
-                    <p>
-                        شحن UC
-                    </p>
-
+                    <div class="game-choice-icon">🔫</div>
+                    <h3>PUBG Mobile</h3>
+                    <p>شحن UC</p>
                 </a>
 
-
-                <!-- تطبيقات -->
 
                 <div
                     class="game-choice"
                     id="appsChoice"
                 >
-
-                    <div class="game-choice-icon">
-                        📱
-                    </div>
-
-                    <h3>
-                        تطبيقات
-                    </h3>
-
-                    <p>
-                        شحن خدمات وعروض التطبيقات
-                    </p>
-
+                    <div class="game-choice-icon">📱</div>
+                    <h3>تطبيقات</h3>
+                    <p>شحن خدمات وعروض التطبيقات</p>
                 </div>
 
             </div>
@@ -1123,7 +838,7 @@
         </div>
 
 
-        <!-- ================= التطبيقات ================= -->
+        <!-- التطبيقات -->
 
         <div
             class="app-form"
@@ -1184,59 +899,32 @@
                         class="payment-option"
                         data-payment="BaridiMob"
                     >
-                        <div class="payment-icon">
-                            🏦
-                        </div>
-
-                        <span>
-                            BaridiMob
-                        </span>
-
+                        <div class="payment-icon">🏦</div>
+                        <span>BaridiMob</span>
                     </div>
-
 
                     <div
                         class="payment-option"
                         data-payment="Flexy"
                     >
-                        <div class="payment-icon">
-                            📱
-                        </div>
-
-                        <span>
-                            Flexy
-                        </span>
-
+                        <div class="payment-icon">📱</div>
+                        <span>Flexy</span>
                     </div>
-
 
                     <div
                         class="payment-option"
                         data-payment="Binance"
                     >
-                        <div class="payment-icon">
-                            🟡
-                        </div>
-
-                        <span>
-                            Binance
-                        </span>
-
+                        <div class="payment-icon">🟡</div>
+                        <span>Binance</span>
                     </div>
-
 
                     <div
                         class="payment-option"
                         data-payment="Bybit"
                     >
-                        <div class="payment-icon">
-                            🔵
-                        </div>
-
-                        <span>
-                            Bybit
-                        </span>
-
+                        <div class="payment-icon">🔵</div>
+                        <span>Bybit</span>
                     </div>
 
                 </div>
@@ -1274,7 +962,7 @@
 
 <script>
 
-    /* ================= الثقة ================= */
+    /* ===== الثقة ===== */
 
     const openTrust =
         document.getElementById("openTrust");
@@ -1285,33 +973,22 @@
     const trustModal =
         document.getElementById("trustModal");
 
-
     openTrust.addEventListener("click", () => {
-
         trustModal.classList.add("show");
-
     });
-
 
     closeTrust.addEventListener("click", () => {
-
         trustModal.classList.remove("show");
-
     });
-
 
     trustModal.addEventListener("click", event => {
-
         if (event.target === trustModal) {
-
             trustModal.classList.remove("show");
-
         }
-
     });
 
 
-    /* ================= الشحن ================= */
+    /* ===== الشحن ===== */
 
     const openGameModal =
         document.getElementById("openGameModal");
@@ -1343,7 +1020,6 @@
     const appError =
         document.getElementById("appError");
 
-
     let selectedPayment = "";
 
 
@@ -1351,9 +1027,7 @@
 
         gameModal.classList.add("show");
 
-        gameSelection.style.display =
-            "block";
-
+        gameSelection.style.display = "block";
         appForm.classList.remove("show");
 
     });
@@ -1369,9 +1043,7 @@
     gameModal.addEventListener("click", event => {
 
         if (event.target === gameModal) {
-
             gameModal.classList.remove("show");
-
         }
 
     });
@@ -1379,21 +1051,16 @@
 
     appsChoice.addEventListener("click", () => {
 
-        gameSelection.style.display =
-            "none";
-
+        gameSelection.style.display = "none";
         appForm.classList.add("show");
 
         selectedPayment = "";
 
         paymentOptions.forEach(item => {
-
             item.classList.remove("selected");
-
         });
 
-        appError.style.display =
-            "none";
+        appError.style.display = "none";
 
     });
 
@@ -1401,9 +1068,7 @@
     appBack.addEventListener("click", () => {
 
         appForm.classList.remove("show");
-
-        gameSelection.style.display =
-            "block";
+        gameSelection.style.display = "block";
 
     });
 
@@ -1413,9 +1078,7 @@
         option.addEventListener("click", () => {
 
             paymentOptions.forEach(item => {
-
                 item.classList.remove("selected");
-
             });
 
             option.classList.add("selected");
@@ -1423,8 +1086,7 @@
             selectedPayment =
                 option.dataset.payment;
 
-            appError.style.display =
-                "none";
+            appError.style.display = "none";
 
         });
 
@@ -1434,16 +1096,10 @@
     appSubmit.addEventListener("click", () => {
 
         const appName =
-            document
-            .getElementById("appName")
-            .value
-            .trim();
+            document.getElementById("appName").value.trim();
 
         const appOffer =
-            document
-            .getElementById("appOffer")
-            .value
-            .trim();
+            document.getElementById("appOffer").value.trim();
 
 
         if (!appName) {
@@ -1451,11 +1107,8 @@
             appError.textContent =
                 "اكتب اسم التطبيق أولًا.";
 
-            appError.style.display =
-                "block";
-
+            appError.style.display = "block";
             return;
-
         }
 
 
@@ -1464,11 +1117,8 @@
             appError.textContent =
                 "اكتب العرض الذي تريد شحنه.";
 
-            appError.style.display =
-                "block";
-
+            appError.style.display = "block";
             return;
-
         }
 
 
@@ -1477,30 +1127,16 @@
             appError.textContent =
                 "اختر طريقة الدفع.";
 
-            appError.style.display =
-                "block";
-
+            appError.style.display = "block";
             return;
-
         }
 
 
         const message =
-
             "📱 طلب شحن تطبيق - DEL STORE\n\n" +
-
-            "اسم التطبيق: " +
-            appName +
-            "\n" +
-
-            "العرض المطلوب: " +
-            appOffer +
-            "\n" +
-
-            "طريقة الدفع: " +
-            selectedPayment +
-            "\n\n" +
-
+            "اسم التطبيق: " + appName + "\n" +
+            "العرض المطلوب: " + appOffer + "\n" +
+            "طريقة الدفع: " + selectedPayment + "\n\n" +
             "أريد إكمال الطلب مع DEL PEIRO كوسيط.";
 
 
@@ -1514,3 +1150,4 @@
 
 </body>
 </html>
+```
