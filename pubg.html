@@ -158,7 +158,7 @@ label{
     gap:15px;
 }
 
-.package{
+.package{position:relative;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation;
     background:var(--surface-2);
     border:1px solid var(--border);
     border-radius:15px;
@@ -176,6 +176,12 @@ label{
     box-shadow:var(--shadow-gold);
 }
 
+.package *{pointer-events:none;}
+.package.selected::after{
+content:"✓";position:absolute;top:8px;left:8px;width:27px;height:27px;
+display:flex;align-items:center;justify-content:center;border-radius:50%;
+background:var(--gold-grad);color:#171106;font-weight:900;z-index:5;
+}
 .amount{
     color:var(--gold-1);
     font-family:'Cairo',sans-serif;
@@ -503,12 +509,10 @@ label{
 
     packages.forEach(pkg => {
 
-        pkg.addEventListener("click", () => {
+        const selectPackage = (event) => {
+            if (event) event.preventDefault();
 
-            packages.forEach(item => {
-                item.classList.remove("selected");
-            });
-
+            packages.forEach(item => item.classList.remove("selected"));
             pkg.classList.add("selected");
 
             selectedPackage = pkg;
@@ -516,15 +520,29 @@ label{
 
             payments.forEach(item => {
                 item.classList.remove("selected");
+                item.classList.remove("disabled");
             });
+
+            const baridi = pkg.dataset.baridi;
+            const dollar = pkg.dataset.dollar;
+
+            if (baridi === "" && typeof baridiPayment !== "undefined") {
+                baridiPayment.classList.add("disabled");
+            }
+
+            if (dollar === "" && typeof binancePayment !== "undefined") {
+                binancePayment.classList.add("disabled");
+            }
 
             paymentSection.classList.add("show");
             result.classList.remove("show");
             success.classList.remove("show");
             whatsappButton.classList.remove("show");
             error.style.display = "none";
+        };
 
-        });
+        pkg.addEventListener("click", selectPackage);
+        pkg.addEventListener("pointerup", selectPackage);
 
     });
 
