@@ -1,4 +1,4 @@
-```html
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -519,6 +519,90 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        .choice-container {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 15px;
+        }
+
+        .choice-card {
+            background: #0c0c11;
+            border: 2px solid #2b2b37;
+            border-radius: 15px;
+            padding: 25px 15px;
+            text-align: center;
+            cursor: pointer;
+            color: white;
+        }
+
+        .choice-card:hover {
+            border-color: #ffd000;
+            transform: translateY(-5px);
+        }
+
+        .choice-card h3 {
+            color: #ffd000;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .choice-card p {
+            color: #999;
+            line-height: 1.6;
+        }
+
+        .price-list {
+            display: grid;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .price-item {
+            background: #0c0c11;
+            border: 1px solid #2b2b37;
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .price-item strong {
+            color: #ffd000;
+        }
+
+        .notice {
+            background: rgba(255,208,0,.12);
+            border: 1px solid #ffd000;
+            color: #ffd000;
+            border-radius: 12px;
+            padding: 14px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .single-payment {
+            background: #ffd000;
+            color: #111;
+            border-radius: 16px;
+            padding: 18px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width:500px) {
+            .choice-container {
+                grid-template-columns: 1fr;
+            }
+            .price-item {
+                flex-direction: column;
+            }
+        }
+
     </style>
 </head>
 
@@ -794,14 +878,11 @@
 
             <div class="game-choice-container">
 
-                <a
-                    class="game-choice"
-                    href="freefire.html"
-                >
+                <div class="game-choice" id="freeFireChoice">
                     <div class="game-choice-icon">🔥</div>
                     <h3>Free Fire</h3>
                     <p>شحن Diamonds والعضويات</p>
-                </a>
+                </div>
 
 
                 <a
@@ -814,14 +895,11 @@
                 </a>
 
 
-                <a
-                    class="game-choice"
-                    href="pubg.html"
-                >
+                <div class="game-choice" id="pubgChoice">
                     <div class="game-choice-icon">🔫</div>
                     <h3>PUBG Mobile</h3>
                     <p>شحن UC</p>
-                </a>
+                </div>
 
 
                 <div
@@ -837,6 +915,50 @@
 
         </div>
 
+
+        <!-- اختيار طريقة الشحن -->
+        <div class="app-form" id="methodForm">
+            <div class="app-back" id="methodBack">← العودة لاختيار اللعبة</div>
+            <h2 id="methodTitle">اختر طريقة الشحن</h2>
+
+            <div class="notice">
+                اختر الطريقة المناسبة لك لإتمام عملية الشحن.
+            </div>
+
+            <div class="choice-container">
+                <div class="choice-card" id="accountMethod">
+                    <div class="game-choice-icon">👤</div>
+                    <h3>عن طريق الحساب</h3>
+                    <p>تعطي حسابك لنا للشحن، كما كانت الطريقة سابقًا.</p>
+                </div>
+
+                <div class="choice-card" id="idMethod">
+                    <div class="game-choice-icon">🆔</div>
+                    <h3>عن طريق الـ ID</h3>
+                    <p>شحن مباشر باستعمال ID اللعبة فقط.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- شحن عن طريق ID -->
+        <div class="app-form" id="idForm">
+            <div class="app-back" id="idBack">← العودة لاختيار طريقة الشحن</div>
+            <h2 id="idTitle">شحن عن طريق الـ ID</h2>
+
+            <div id="idPrices" class="price-list"></div>
+
+            <div class="field">
+                <label>1. أدخل ID اللاعب</label>
+                <input type="text" id="playerId" placeholder="اكتب ID الخاص بك">
+            </div>
+
+            <div class="single-payment">
+                💳 طريقة الدفع المتاحة: BaridiMob فقط
+            </div>
+
+            <button class="app-submit" id="idSubmit">✅ إرسال طلب الشحن</button>
+            <div class="app-error" id="idError"></div>
+        </div>
 
         <!-- التطبيقات -->
 
@@ -1021,6 +1143,117 @@
         document.getElementById("appError");
 
     let selectedPayment = "";
+    let selectedGame = "";
+
+    const freeFireChoice = document.getElementById("freeFireChoice");
+    const pubgChoice = document.getElementById("pubgChoice");
+    const methodForm = document.getElementById("methodForm");
+    const methodTitle = document.getElementById("methodTitle");
+    const methodBack = document.getElementById("methodBack");
+    const accountMethod = document.getElementById("accountMethod");
+    const idMethod = document.getElementById("idMethod");
+    const idForm = document.getElementById("idForm");
+    const idBack = document.getElementById("idBack");
+    const idTitle = document.getElementById("idTitle");
+    const idPrices = document.getElementById("idPrices");
+    const playerId = document.getElementById("playerId");
+    const idSubmit = document.getElementById("idSubmit");
+    const idError = document.getElementById("idError");
+
+    const prices = {
+        freefire: [
+            ["110 Diamonds", "35 ألف دج"],
+            ["210 Diamonds", "70 ألف دج"],
+            ["583 Diamonds", "175 ألف دج"],
+            ["عضوية أسبوعية", "75 ألف دج"],
+            ["عضوية شهرية", "310 ألف دج"]
+        ],
+        pubg: [
+            ["60 UC", "35 ألف دج"],
+            ["660 UC", "300 ألف دج"],
+            ["1800 UC", "700 ألف دج"]
+        ]
+    };
+
+    function openMethod(game) {
+        selectedGame = game;
+        methodTitle.textContent =
+            game === "freefire"
+                ? "🔥 اختر طريقة شحن Free Fire"
+                : "🔫 اختر طريقة شحن PUBG Mobile";
+
+        gameSelection.style.display = "none";
+        appForm.classList.remove("show");
+        methodForm.classList.add("show");
+        idForm.classList.remove("show");
+        idError.style.display = "none";
+    }
+
+    freeFireChoice.addEventListener("click", () => openMethod("freefire"));
+    pubgChoice.addEventListener("click", () => openMethod("pubg"));
+
+    methodBack.addEventListener("click", () => {
+        methodForm.classList.remove("show");
+        gameSelection.style.display = "block";
+    });
+
+    accountMethod.addEventListener("click", () => {
+        if (selectedGame === "freefire") {
+            window.location.href = "freefire.html";
+        } else {
+            window.location.href = "pubg.html";
+        }
+    });
+
+    idMethod.addEventListener("click", () => {
+        methodForm.classList.remove("show");
+        idForm.classList.add("show");
+
+        const isFF = selectedGame === "freefire";
+        idTitle.textContent = isFF
+            ? "🔥 شحن Free Fire عن طريق الـ ID"
+            : "🔫 شحن PUBG Mobile عن طريق الـ ID";
+
+        idPrices.innerHTML = prices[selectedGame].map(item => `
+            <div class="price-item">
+                <span>${item[0]}</span>
+                <strong>${item[1]}</strong>
+            </div>
+        `).join("");
+
+        playerId.value = "";
+        idError.style.display = "none";
+    });
+
+    idBack.addEventListener("click", () => {
+        idForm.classList.remove("show");
+        methodForm.classList.add("show");
+    });
+
+    idSubmit.addEventListener("click", () => {
+        const id = playerId.value.trim();
+
+        if (!id) {
+            idError.textContent = "أدخل ID اللاعب أولًا.";
+            idError.style.display = "block";
+            return;
+        }
+
+        const gameName = selectedGame === "freefire"
+            ? "Free Fire"
+            : "PUBG Mobile";
+
+        const message =
+            "🎮 طلب شحن عن طريق ID - DEL STORE\n\n" +
+            "اللعبة: " + gameName + "\n" +
+            "ID اللاعب: " + id + "\n" +
+            "طريقة الدفع: BaridiMob فقط\n\n" +
+            "الأسعار المعروضة في الموقع، وأريد إكمال الطلب مع DEL PEIRO كوسيط.";
+
+        window.location.href =
+            "https://wa.me/213561265114?text=" +
+            encodeURIComponent(message);
+    });
 
 
     openGameModal.addEventListener("click", () => {
@@ -1029,6 +1262,8 @@
 
         gameSelection.style.display = "block";
         appForm.classList.remove("show");
+        methodForm.classList.remove("show");
+        idForm.classList.remove("show");
 
     });
 
@@ -1057,7 +1292,7 @@
         selectedPayment = "";
 
         paymentOptions.forEach(item => {
-            item.classList.remove("selected");
+            item.classList.remove("selected"); 
         });
 
         appError.style.display = "none";
@@ -1150,4 +1385,3 @@
 
 </body>
 </html>
-```
