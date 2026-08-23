@@ -80,7 +80,7 @@
 
         .packages{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;}
 
-        .package{
+        .package{ position:relative; user-select:none; -webkit-user-select:none; -webkit-tap-highlight-color:transparent; touch-action:manipulation;
             background:var(--surface-2);
             border:2px solid var(--border);
             border-radius:14px;padding:26px 15px;
@@ -94,7 +94,27 @@
             transform:translateY(-3px);
         }
 
-        .amount{color:var(--gold-1);font-size:19px;font-weight:800;}
+        .package *{pointer-events:none;}
+.package.selected::after{
+    content:"✓";
+    position:absolute;
+    top:8px;
+    left:8px;
+    width:26px;
+    height:26px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:var(--gold-grad);
+    color:#171106;
+    font-family:'Cairo',sans-serif;
+    font-weight:900;
+    font-size:15px;
+    box-shadow:var(--shadow-gold);
+}
+
+.amount{color:var(--gold-1);font-size:19px;font-weight:800;}
 
         .payment-section{margin-top:38px;display:none;}
         .payment-section.show{display:block;animation:fadeIn .25s ease;}
@@ -117,7 +137,7 @@
         .payment-icon{font-size:28px;margin-bottom:10px;}
         .payment-name{font-size:16.5px;font-weight:800;}
 
-        .payment.disabled{opacity:.32;cursor:not-allowed;}
+        .payment.disabled{opacity:.32;cursor:not-allowed;pointer-events:none;}
 
         .result{margin-top:28px;display:none;}
         .result.show{display:block;animation:fadeIn .25s ease;}
@@ -373,7 +393,10 @@
 
     packages.forEach(pkg => {
 
-        pkg.addEventListener("click", () => {
+        const selectPackage = (event) => {
+            if (event) event.preventDefault();
+
+
 
             packages.forEach(item => {
                 item.classList.remove("selected");
@@ -407,7 +430,10 @@
             whatsappButton.classList.remove("show");
 
             error.style.display = "none";
-        });
+        };
+
+        pkg.addEventListener("click", selectPackage);
+        pkg.addEventListener("touchend", selectPackage, {passive:false});
 
     });
 
