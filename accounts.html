@@ -3,247 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الحسابات - DEL STORE</title>
+    <title>الحسابات — DEL STORE</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
+        :root{
+            --bg:#08080c; --surface:#131319; --surface-2:#181820;
+            --border:#242430; --border-hover:#4a3c18;
+            --gold-1:#f7e3aa; --gold-2:#e0b64f; --gold-3:#a9791f;
+            --gold-grad:linear-gradient(135deg,var(--gold-1) 0%,var(--gold-2) 55%,var(--gold-3) 100%);
+            --text:#f4f1ea; --text-dim:#9a97a3; --text-faint:#5d5a66;
+            --green:#3ddc97; --red:#ff7676;
+            --amber-bg:#221a05; --amber-border:#6b5610; --amber-text:#f0cf7c;
+            --radius-lg:22px; --radius-md:16px; --radius-sm:11px;
+            --shadow-gold:0 10px 32px -10px rgba(224,182,79,.4);
         }
 
-        body {
-            background: #09090d;
-            color: white;
+        *{box-sizing:border-box;margin:0;padding:0;}
+
+        body{
+            background:
+                radial-gradient(1000px 500px at 10% -10%, rgba(224,182,79,.08), transparent 60%),
+                var(--bg);
+            color:var(--text);
+            font-family:'Tajawal',sans-serif;
+            line-height:1.55;
+            -webkit-font-smoothing:antialiased;
         }
 
-        header {
-            height: 80px;
-            padding: 0 7%;
-            background: #111118;
-            border-bottom: 1px solid #282832;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        ::selection{background:var(--gold-2);color:#171106;}
+        ::-webkit-scrollbar{width:10px;}
+        ::-webkit-scrollbar-track{background:var(--bg);}
+        ::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px;}
+
+        header{
+            position:sticky;top:0;z-index:20;
+            height:76px;padding:0 7%;
+            background:rgba(9,9,13,.72);
+            backdrop-filter:blur(16px) saturate(140%);
+            -webkit-backdrop-filter:blur(16px) saturate(140%);
+            border-bottom:1px solid var(--border);
+            display:flex;align-items:center;justify-content:space-between;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
+        .logo{
+            display:flex;align-items:center;text-decoration:none;
+            font-family:'Cairo',sans-serif;font-weight:900;font-size:22px;
+            background:var(--gold-grad);-webkit-background-clip:text;background-clip:text;color:transparent;
         }
 
-        .logo img {
-            height: 55px;
-            width: auto;
-            object-fit: contain;
+        .back{
+            color:var(--text-dim);text-decoration:none;font-weight:500;font-size:14.5px;
+            padding:9px 16px;border:1px solid var(--border);border-radius:10px;transition:.2s;
+        }
+        .back:hover{color:var(--gold-1);border-color:var(--border-hover);}
+
+        .container{max-width:1020px;margin:50px auto;padding:20px;}
+
+        h1{
+            text-align:center;font-family:'Cairo',sans-serif;font-weight:900;
+            font-size:38px;margin-bottom:10px;
         }
 
-        .back {
-            color: white;
-            text-decoration: none;
+        .subtitle{text-align:center;color:var(--text-dim);margin-bottom:38px;font-size:15.5px;}
+
+        .box{
+            background:var(--surface);
+            border:1px solid var(--border);
+            border-radius:var(--radius-lg);
+            padding:34px;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 45px auto;
-            padding: 20px;
+        .section{margin-bottom:38px;}
+
+        .title{
+            color:var(--gold-1);font-size:20px;font-weight:800;margin-bottom:20px;
+            font-family:'Cairo',sans-serif;
+            display:flex;align-items:center;gap:10px;
         }
 
-        h1 {
-            text-align: center;
-            font-size: 38px;
-            margin-bottom: 10px;
+        .choices{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+        .payment-choices{grid-template-columns:repeat(4,1fr);}
+        .actions{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;}
+
+        .choice, .action{
+            background:var(--surface-2);
+            border:2px solid var(--border);
+            border-radius:15px;padding:25px;
+            text-align:center;cursor:pointer;transition:.2s;color:var(--text);
         }
 
-        .subtitle {
-            text-align: center;
-            color: #999;
-            margin-bottom: 35px;
+        .choice:hover, .action:hover{border-color:var(--border-hover);transform:translateY(-3px);}
+        .choice.selected, .action.selected{
+            border-color:var(--gold-3);
+            background:linear-gradient(145deg, rgba(224,182,79,.1), rgba(224,182,79,.02));
+            box-shadow:var(--shadow-gold);
+            transform:translateY(-3px);
         }
 
-        .box {
-            background: #15151d;
-            border: 1px solid #2b2b37;
-            border-radius: 20px;
-            padding: 30px;
+        .icon{font-size:40px;margin-bottom:12px;}
+
+        .choice h3, .action h3{color:var(--gold-1);margin-bottom:8px;font-family:'Cairo',sans-serif;font-weight:800;font-size:16.5px;}
+        .choice p, .action p{color:var(--text-faint);font-size:13.5px;}
+
+        .hidden{display:none !important;}
+
+        label{display:block;margin:20px 0 9px;font-weight:800;font-family:'Cairo',sans-serif;font-size:14.5px;}
+
+        input, textarea{
+            width:100%;padding:14px;
+            background:var(--surface-2);color:var(--text);
+            border:1px solid var(--border);border-radius:11px;
+            font-size:15.5px;outline:none;font-family:inherit;
+            transition:.2s;
+        }
+        textarea{min-height:130px;resize:vertical;}
+
+        input:focus, textarea:focus{border-color:var(--gold-3);box-shadow:0 0 0 3px rgba(224,182,79,.12);}
+
+        .yes-no{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin-top:10px;}
+
+        .yes-no-option{
+            background:var(--surface-2);
+            border:2px solid var(--border);
+            border-radius:13px;padding:16px;
+            text-align:center;cursor:pointer;font-weight:800;transition:.2s;
+        }
+        .yes-no-option:hover{border-color:var(--border-hover);}
+        .yes-no-option.selected{border-color:var(--gold-3);color:var(--gold-1);box-shadow:var(--shadow-gold);}
+
+        .confirm{
+            width:100%;margin-top:26px;padding:17px;
+            border:0;border-radius:12px;
+            background:var(--gold-grad);color:#171106;
+            font-size:16.5px;font-weight:900;cursor:pointer;transition:.2s;
+        }
+        .confirm:hover{transform:translateY(-2px);box-shadow:var(--shadow-gold);}
+
+        .warning{
+            margin-top:22px;padding:16px;
+            background:var(--amber-bg);border:1px solid var(--amber-border);
+            border-radius:12px;color:var(--amber-text);text-align:center;line-height:1.75;font-size:14px;
         }
 
-        .section {
-            margin-bottom: 35px;
-        }
+        .error{display:none;color:var(--red);text-align:center;margin-top:15px;font-size:14.5px;}
 
-        .title {
-            color: #ffd000;
-            font-size: 23px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .choices {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
-        }
-
-        .payment-choices {
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        .actions {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .choice,
-        .action {
-            background: #0c0c11;
-            border: 2px solid #2b2b37;
-            border-radius: 15px;
-            padding: 25px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.2s;
-            color: white;
-        }
-
-        .choice:hover,
-        .choice.selected,
-        .action:hover,
-        .action.selected {
-            border-color: #ffd000;
-            background: #18170e;
-            transform: translateY(-3px);
-        }
-
-        .icon {
-            font-size: 45px;
-            margin-bottom: 12px;
-        }
-
-        .choice h3,
-        .action h3 {
-            color: #ffd000;
-            margin-bottom: 8px;
-        }
-
-        .choice p,
-        .action p {
-            color: #888;
-            font-size: 14px;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        label {
-            display: block;
-            margin: 18px 0 8px;
-            font-weight: bold;
-        }
-
-        input,
-        textarea {
-            width: 100%;
-            padding: 14px;
-            background: #0b0b10;
-            color: white;
-            border: 1px solid #353541;
-            border-radius: 11px;
-            font-size: 16px;
-            outline: none;
-        }
-
-        textarea {
-            min-height: 130px;
-            resize: vertical;
-        }
-
-        input:focus,
-        textarea:focus {
-            border-color: #ffd000;
-        }
-
-        .yes-no {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 10px;
-        }
-
-        .yes-no-option {
-            background: #0c0c11;
-            border: 2px solid #2b2b37;
-            border-radius: 13px;
-            padding: 16px;
-            text-align: center;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.2s;
-        }
-
-        .yes-no-option:hover,
-        .yes-no-option.selected {
-            border-color: #ffd000;
-            background: #18170e;
-            color: #ffd000;
-        }
-
-        .confirm {
-            width: 100%;
-            margin-top: 25px;
-            padding: 16px;
-            border: 0;
-            border-radius: 12px;
-            background: #ffd000;
-            color: #111;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .confirm:hover {
-            background: #ffe052;
-        }
-
-        .warning {
-            margin-top: 20px;
-            padding: 15px;
-            background: #261f00;
-            border: 1px solid #806d00;
-            border-radius: 12px;
-            color: #ffe77a;
-            text-align: center;
-            line-height: 1.7;
-        }
-
-        .error {
-            display: none;
-            color: #ff7070;
-            text-align: center;
-            margin-top: 15px;
-        }
-
-        @media (max-width: 800px) {
-            .payment-choices {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .choices,
-            .actions {
-                grid-template-columns: 1fr;
-            }
-
-            h1 {
-                font-size: 30px;
-            }
-
-            .logo img {
-                height: 45px;
-            }
+        @media (max-width: 800px){
+            .payment-choices{grid-template-columns:repeat(2,1fr);}
+            .choices, .actions{grid-template-columns:1fr;}
+            h1{font-size:30px;}
+            .box{padding:22px;}
         }
     </style>
 </head>
@@ -251,13 +163,8 @@
 <body>
 
 <header>
-    <a href="index.html" class="logo">
-        <img src="logo.jpg" alt="DEL STORE">
-    </a>
-
-    <a href="index.html" class="back">
-        ← العودة للرئيسية
-    </a>
+    <a href="index.html" class="logo">DEL STORE</a>
+    <a href="index.html" class="back">← العودة للرئيسية</a>
 </header>
 
 <div class="container">

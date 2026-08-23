@@ -6,237 +6,329 @@
     <title>PUBG Mobile - DEL STORE</title>
 
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-        }
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;800;900&family=Tajawal:wght@300;400;500;700;900&display=swap');
 
-        body {
-            background: #09090d;
-            color: white;
-        }
+:root{
+    --bg:#08080c;
+    --surface:#131319;
+    --surface-2:#181820;
+    --border:#242430;
+    --border-hover:#4a3c18;
+    --gold-1:#f7e3aa;
+    --gold-2:#e0b64f;
+    --gold-3:#a9791f;
+    --gold-grad:linear-gradient(135deg,var(--gold-1) 0%,var(--gold-2) 55%,var(--gold-3) 100%);
+    --text:#f4f1ea;
+    --text-dim:#9a97a3;
+    --text-faint:#5d5a66;
+    --green:#3ddc97;
+    --red:#ff7676;
+    --amber-bg:#221a05;
+    --amber-border:#6b5610;
+    --amber-text:#f0cf7c;
+    --radius-lg:22px;
+    --radius-md:16px;
+    --radius-sm:11px;
+    --shadow-gold:0 10px 32px -10px rgba(224,182,79,.4);
+}
 
-        header {
-            height: 75px;
-            padding: 0 7%;
-            background: #111118;
-            border-bottom: 1px solid #282832;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 
-        .logo {
-            color: #ffd000;
-            font-size: 28px;
-            font-weight: bold;
-        }
+body{
+    min-height:100vh;
+    background:
+        radial-gradient(1100px 560px at 12% -8%,rgba(224,182,79,.09),transparent 60%),
+        radial-gradient(900px 500px at 100% 2%,rgba(224,182,79,.05),transparent 55%),
+        var(--bg);
+    color:var(--text);
+    font-family:'Tajawal',sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+}
 
-        .back {
-            color: white;
-            text-decoration: none;
-        }
+::selection{background:var(--gold-2);color:#171106}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:10px}
+::-webkit-scrollbar-thumb:hover{background:var(--gold-3)}
 
-        .container {
-            max-width: 950px;
-            margin: 45px auto;
-            padding: 20px;
-        }
+button{font-family:inherit}
 
-        h1 {
-            text-align: center;
-            font-size: 38px;
-            margin-bottom: 10px;
-        }
+header{
+    position:sticky;
+    top:0;
+    z-index:60;
+    height:78px;
+    padding:0 7%;
+    background:rgba(9,9,13,.72);
+    backdrop-filter:blur(16px) saturate(140%);
+    -webkit-backdrop-filter:blur(16px) saturate(140%);
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
 
-        .subtitle {
-            text-align: center;
-            color: #999;
-            margin-bottom: 35px;
-        }
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Cairo',sans-serif;
+    font-weight:900;
+    font-size:22px;
+    letter-spacing:.3px;
+    color:var(--text);
+}
 
-        .box {
-            background: #15151d;
-            border: 1px solid #2b2b37;
-            border-radius: 20px;
-            padding: 30px;
-        }
+.logo::before{
+    content:"";
+    width:34px;
+    height:34px;
+    border-radius:9px;
+    background:var(--gold-grad);
+    box-shadow:var(--shadow-gold);
+    flex-shrink:0;
+    -webkit-mask:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3 5h5l-4 4 2 6-6-3.5L6 17l2-6-4-4h5z"/></svg>') center/62% no-repeat;
+    mask:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2l3 5h5l-4 4 2 6-6-3.5L6 17l2-6-4-4h5z"/></svg>') center/62% no-repeat;
+    background-color:#171106;
+}
 
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 12px;
-        }
+.back{
+    color:var(--text-dim);
+    text-decoration:none;
+    font-size:15px;
+    font-weight:700;
+    padding:9px 16px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    transition:.2s;
+}
 
-        .packages {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
+.back:hover{
+    color:var(--gold-1);
+    border-color:var(--gold-3);
+    background:rgba(224,182,79,.06);
+}
 
-        .package {
-            background: #0c0c11;
-            border: 2px solid #2b2b37;
-            border-radius: 14px;
-            padding: 25px 15px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+.container{
+    width:min(950px,86%);
+    margin:0 auto;
+    padding:70px 0 90px;
+}
 
-        .package:hover,
-        .package.selected {
-            border-color: #ffd000;
-            background: #18170e;
-            transform: translateY(-3px);
-        }
+h1{
+    text-align:center;
+    font-family:'Cairo',sans-serif;
+    font-size:42px;
+    font-weight:900;
+    margin-bottom:10px;
+    background:var(--gold-grad);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+}
 
-        .amount {
-            color: #ffd000;
-            font-size: 21px;
-            font-weight: bold;
-        }
+.subtitle{
+    text-align:center;
+    color:var(--text-dim);
+    font-size:16px;
+    margin-bottom:38px;
+}
 
-        .payment-section {
-            margin-top: 35px;
-            display: none;
-        }
+.box{
+    background:rgba(19,19,25,.92);
+    border:1px solid var(--border);
+    border-radius:var(--radius-lg);
+    padding:32px;
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
 
-        .payment-section.show {
-            display: block;
-        }
+label{
+    display:block;
+    font-family:'Cairo',sans-serif;
+    font-weight:800;
+    margin-bottom:13px;
+    color:var(--text);
+}
 
-        .payments {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-top: 15px;
-        }
+.packages{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
 
-        .payment {
-            background: #0c0c11;
-            border: 2px solid #2b2b37;
-            border-radius: 14px;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+.package{
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:25px 15px;
+    text-align:center;
+    cursor:pointer;
+    transition:.25s;
+}
 
-        .payment:hover,
-        .payment.selected {
-            border-color: #ffd000;
-            background: #18170e;
-        }
+.package:hover,
+.package.selected{
+    border-color:var(--gold-3);
+    background:rgba(224,182,79,.07);
+    transform:translateY(-4px);
+    box-shadow:var(--shadow-gold);
+}
 
-        .payment-icon {
-            font-size: 30px;
-            margin-bottom: 10px;
-        }
+.amount{
+    color:var(--gold-1);
+    font-family:'Cairo',sans-serif;
+    font-size:20px;
+    font-weight:900;
+}
 
-        .payment-name {
-            font-size: 18px;
-            font-weight: bold;
-        }
+.payment-section{
+    margin-top:35px;
+    display:none;
+    animation:fadeIn .2s ease;
+}
 
-        .result {
-            margin-top: 25px;
-            display: none;
-        }
+.payment-section.show{display:block}
 
-        .result.show {
-            display: block;
-        }
+.payments{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-top:15px;
+}
 
-        .summary {
-            background: #0c0c11;
-            border: 1px solid #353541;
-            border-radius: 14px;
-            padding: 22px;
-            line-height: 2.2;
-        }
+.payment{
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:20px;
+    text-align:center;
+    cursor:pointer;
+    transition:.25s;
+}
 
-        .summary strong {
-            color: #ffd000;
-        }
+.payment:hover,
+.payment.selected{
+    border-color:var(--gold-3);
+    background:rgba(224,182,79,.07);
+    transform:translateY(-3px);
+    box-shadow:var(--shadow-gold);
+}
 
-        .warning {
-            margin-top: 18px;
-            padding: 17px;
-            background: #261f00;
-            border: 1px solid #806d00;
-            border-radius: 12px;
-            color: #ffe77a;
-            text-align: center;
-            font-weight: bold;
-        }
+.payment-icon{
+    font-size:30px;
+    margin-bottom:10px;
+}
 
-        .confirm-button,
-        .whatsapp-button {
-            width: 100%;
-            margin-top: 20px;
-            padding: 16px;
-            border: none;
-            border-radius: 12px;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
-            text-align: center;
-            display: block;
-            text-decoration: none;
-        }
+.payment-name{
+    color:var(--gold-1);
+    font-family:'Cairo',sans-serif;
+    font-size:17px;
+    font-weight:800;
+}
 
-        .confirm-button {
-            background: #ffd000;
-            color: #111;
-        }
+.result{
+    margin-top:25px;
+    display:none;
+    animation:riseIn .25s ease;
+}
 
-        .confirm-button:hover {
-            background: #ffe052;
-        }
+.result.show{display:block}
 
-        .whatsapp-button {
-            background: #25D366;
-            color: white;
-            display: none;
-        }
+.summary{
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:22px;
+    line-height:2.2;
+}
 
-        .whatsapp-button.show {
-            display: block;
-        }
+.summary strong{color:var(--gold-1)}
 
-        .success {
-            color: #7dffae;
-            text-align: center;
-            margin-top: 18px;
-            display: none;
-            line-height: 1.8;
-        }
+.warning{
+    margin-top:18px;
+    padding:17px;
+    background:var(--amber-bg);
+    border:1px solid var(--amber-border);
+    border-radius:12px;
+    color:var(--amber-text);
+    text-align:center;
+    font-weight:700;
+}
 
-        .success.show {
-            display: block;
-        }
+.confirm-button,
+.whatsapp-button{
+    width:100%;
+    margin-top:20px;
+    padding:16px;
+    border:none;
+    border-radius:12px;
+    font-size:17px;
+    font-weight:900;
+    cursor:pointer;
+    text-align:center;
+    display:block;
+    text-decoration:none;
+    transition:.2s;
+}
 
-        .error {
-            color: #ff7272;
-            margin-top: 12px;
-            display: none;
-            text-align: center;
-        }
+.confirm-button{
+    background:var(--gold-grad);
+    color:#171106;
+    box-shadow:var(--shadow-gold);
+}
 
-        @media (max-width: 750px) {
-            .packages,
-            .payments {
-                grid-template-columns: 1fr;
-            }
+.confirm-button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 14px 34px -8px rgba(224,182,79,.55);
+}
 
-            h1 {
-                font-size: 30px;
-            }
-        }
-    </style>
+.whatsapp-button{
+    background:#15151b;
+    color:var(--text);
+    border:1px solid var(--border);
+    display:none;
+}
+
+.whatsapp-button:hover{
+    border-color:var(--gold-3);
+    color:var(--gold-1);
+    transform:translateY(-2px);
+}
+
+.whatsapp-button.show{display:block}
+
+.success{
+    color:var(--green);
+    text-align:center;
+    margin-top:18px;
+    display:none;
+    line-height:1.8;
+}
+
+.success.show{display:block}
+
+.error{
+    color:var(--red);
+    margin-top:12px;
+    display:none;
+    text-align:center;
+}
+
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes riseIn{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+
+@media(max-width:750px){
+    header{padding:0 5%}
+    .container{width:92%;padding-top:45px}
+    .box{padding:24px 18px}
+    .packages,.payments{grid-template-columns:1fr}
+    h1{font-size:32px}
+    .logo{font-size:19px}
+    .back{font-size:13px;padding:8px 11px}
+}
+</style>
 </head>
 
 <body>
